@@ -2,9 +2,9 @@ import { Common } from './common';
 import { Login, GetLogin } from './login';
 
 export interface CoreModule {
-    Common: Common,
-    Login: Login,
-    GetLogin: GetLogin,
+  Common: Common;
+  Login: Login;
+  GetLogin: GetLogin;
 }
 
 /*
