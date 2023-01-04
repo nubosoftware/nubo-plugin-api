@@ -5,6 +5,12 @@ export type RequestHandler = (req: Request, res: Response, next: Next) => any;
 export type RequestHandlerType = RequestHandler | RequestHandler[];
 export type Next = (err?: any) => void;
 
+export interface Route {
+  name: string;
+  method: string;
+  path: string | RegExp;  
+}
+
 export interface Request extends http.IncomingMessage {
   /**
    * Builds an absolute URI for the request.
@@ -394,7 +400,7 @@ export interface Server extends http.Server {
    *                                 if options, the URL to handle, at minimum.
    * @returns                the newly created route.
    */
-  del(opts: string | RegExp, handler: RequestHandler): void;
+  del(opts: string | RegExp, handler: RequestHandler): Route;
 
   /**
    * Mounts a chain on the given path against this HTTP verb
@@ -403,7 +409,7 @@ export interface Server extends http.Server {
    *                                 if options, the URL to handle, at minimum.
    * @returns                the newly created route.
    */
-  get(opts: string | RegExp, handler: RequestHandler): void;
+  get(opts: string | RegExp, handler: RequestHandler): Route;
 
   /**
    * Mounts a chain on the given path against this HTTP verb
@@ -412,7 +418,7 @@ export interface Server extends http.Server {
    *                                 if options, the URL to handle, at minimum.
    * @returns                the newly created route.
    */
-  head(opts: string | RegExp, handler: RequestHandler): void;
+  head(opts: string | RegExp, handler: RequestHandler): Route;
 
   /**
    * Mounts a chain on the given path against this HTTP verb
@@ -421,7 +427,7 @@ export interface Server extends http.Server {
    *                                 if options, the URL to handle, at minimum.
    * @returns                the newly created route.
    */
-  opts(opts: string | RegExp, handler: RequestHandler): void;
+  opts(opts: string | RegExp, handler: RequestHandler): Route;
 
   /**
    * Mounts a chain on the given path against this HTTP verb
@@ -430,7 +436,7 @@ export interface Server extends http.Server {
    *                                 if options, the URL to handle, at minimum.
    * @returns                the newly created route.
    */
-  post(opts: string | RegExp, handler: RequestHandler): void;
+  post(opts: string | RegExp, handler: RequestHandler): Route;
 
   /**
    * Mounts a chain on the given path against this HTTP verb
@@ -439,7 +445,7 @@ export interface Server extends http.Server {
    *                                 if options, the URL to handle, at minimum.
    * @returns                the newly created route.
    */
-  put(opts: string | RegExp, handler: RequestHandler): void;
+  put(opts: string | RegExp, handler: RequestHandler): Route;
 
   /**
    * Mounts a chain on the given path against this HTTP verb
@@ -448,42 +454,52 @@ export interface Server extends http.Server {
    *                                 if options, the URL to handle, at minimum.
    * @returns                the newly created route.
    */
-  patch(opts: string | RegExp, handler: RequestHandler): void;
+  patch(opts: string | RegExp, handler: RequestHandler): Route;
+
 
   /**
-   * Minimal port of the functionality offered by Express.js Route Param
-   * Pre-conditions
-   * @link http://expressjs.com/guide.html#route-param%20pre-conditions
-   *
-   * This basically piggy-backs on the `server.use` method. It attaches a
-   * new middleware function that only fires if the specified parameter exists
-   * in req.params
-   *
-   * Exposes an API:
-   *   server.param("user", function (req, res, next) {
-   *     // load the user's information here, always making sure to call next()
-   *   });
-   *
-   * @param      name The name of the URL param to respond to
-   * @param    fn   The middleware function to execute
-   * @returns         returns self
+   * Removes a route from the server.
+   * You pass in the route 'blob' you got from a mount call.
+   * @throws   {TypeError} on bad input.
+   * @param       route the route name.
+   * @returns          true if route was removed, false if not.
    */
-  param(name: string, fn: RequestHandler): Server;
+  rm(route: string): boolean;
 
-  /**
-   * Installs a list of handlers to run _before_ the "normal" handlers of all
-   * routes.
-   *
-   * You can pass in any combination of functions or array of functions.
-   * @returns returns self
-   */
-  use(...handlers: RequestHandlerType[]): Server;
+  // /**
+  //  * Minimal port of the functionality offered by Express.js Route Param
+  //  * Pre-conditions
+  //  * @link http://expressjs.com/guide.html#route-param%20pre-conditions
+  //  *
+  //  * This basically piggy-backs on the `server.use` method. It attaches a
+  //  * new middleware function that only fires if the specified parameter exists
+  //  * in req.params
+  //  *
+  //  * Exposes an API:
+  //  *   server.param("user", function (req, res, next) {
+  //  *     // load the user's information here, always making sure to call next()
+  //  *   });
+  //  *
+  //  * @param      name The name of the URL param to respond to
+  //  * @param    fn   The middleware function to execute
+  //  * @returns         returns self
+  //  */
+  // param(name: string, fn: RequestHandler): Server;
 
-  /**
-   * Gives you hooks to run _before_ any routes are located.  This gives you
-   * a chance to intercept the request and change headers, etc., that routing
-   * depends on.  Note that req.params will _not_ be set yet.
-   * @returns returns self
-   */
-  pre(...pre: RequestHandlerType[]): Server;
+  // /**
+  //  * Installs a list of handlers to run _before_ the "normal" handlers of all
+  //  * routes.
+  //  *
+  //  * You can pass in any combination of functions or array of functions.
+  //  * @returns returns self
+  //  */
+  // use(...handlers: RequestHandlerType[]): Server;
+
+  // /**
+  //  * Gives you hooks to run _before_ any routes are located.  This gives you
+  //  * a chance to intercept the request and change headers, etc., that routing
+  //  * depends on.  Note that req.params will _not_ be set yet.
+  //  * @returns returns self
+  //  */
+  // pre(...pre: RequestHandlerType[]): Server;
 }
