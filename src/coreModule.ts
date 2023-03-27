@@ -1,10 +1,19 @@
-import { Common } from './common';
+import { Common, RedisClient, PluginInterface } from './common';
 import { Login, GetLogin } from './login';
 
+
+
+
 export interface CoreModule {
+  pluginId: string;
+  pluginName: string;
+  pluginVersion: string;
   Common: Common;
   Login: Login;
   GetLogin: GetLogin;
+  redis: RedisClient;
+  plugin: PluginInterface;
+  
 }
 
 /*

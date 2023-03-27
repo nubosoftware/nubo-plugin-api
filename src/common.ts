@@ -1,3 +1,5 @@
+import  { DataTypes, ModelAttributes, ModelOptions, Model, ModelStatic }  from  'sequelize';
+
 export interface Common {
   STATUS_OK: 1;
   STATUS_ERROR: 0;
@@ -45,6 +47,7 @@ export interface Common {
 
   minUXIPVersion: 1;
 
+  dcURL: string;
   serverurl: string;
   internalurl: string;
   // nodemailer : require("nodemailer"),
@@ -88,6 +91,7 @@ export interface Common {
 
   otpTimeout: number;
   otpMaxTries: number;
+  isDaemonProcess: boolean;
 
   emailSender: {
     senderEmail: string;
@@ -110,3 +114,13 @@ export interface Logger {
   warn: (text: string) => void;
   debug: (text: string) => void;
 }
+
+export interface RedisClient {
+  sendCommand: (command: string, ...args: any[]) => Promise<any>;
+}
+
+export interface PluginInterface {
+  sendMessageToPlugin: (pluginId: string, message: any) => Promise<any>;
+  defineDBModel: (modelName: string, modelDefinition: ModelAttributes, options?: ModelOptions) => ModelStatic<any>;
+}
+

@@ -20,15 +20,27 @@ export type PluginTrigger = {
   action: string;
   handler: PluginTriggerHandler;
 }
+
+export type PluginConfigurationDesciption = {
+  key: string;
+  name: string;
+  dataType: "string" | "number" | "boolean" | "object" | "array";
+  defaultValue: any;
+}
+
+
 export type PluginInitResponse = {
   staticFoldersPlugins?: StaticPlugIn[];
   publicServerHandlers?: ServerMount[];
   triggers?: PluginTrigger[];
+  sessionType?: string | string[];
 }
 
 export interface PluginModule {
-  init: (coreModule: CoreModule) => PluginInitResponse;
+  getConfDesciptions?: () => PluginConfigurationDesciption[];
+  init: (coreModule: CoreModule, configuration?: any) => PluginInitResponse;
   deinit?: () => void;
+  handleMessage?: (message: any) => void;
   // addPublicServerHandlers?: (server: Server) => void;
   handleRestApiRequest?: (
     objectType: string,
