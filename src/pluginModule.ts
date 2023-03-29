@@ -29,11 +29,16 @@ export type PluginConfigurationDesciption = {
 }
 
 
+export type SessionType = {
+  value: string;
+  title: string;
+}
+
 export type PluginInitResponse = {
   staticFoldersPlugins?: StaticPlugIn[];
   publicServerHandlers?: ServerMount[];
   triggers?: PluginTrigger[];
-  sessionType?: string | string[];
+  sessionType?: SessionType | SessionType[];
 }
 
 export interface PluginModule {
