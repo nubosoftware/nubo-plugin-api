@@ -1,6 +1,6 @@
 {
   "name": "nubo-plugin-api",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Nubo Plugin API",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

@@ -32,6 +32,8 @@ export type PluginConfigurationDesciption = {
 export type SessionType = {
   value: string;
   title: string;
+  icon?: string;
+  link?: string;
 }
 
 export type PluginInitResponse = {
