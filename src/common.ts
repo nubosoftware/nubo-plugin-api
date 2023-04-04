@@ -92,6 +92,7 @@ export interface Common {
   otpTimeout: number;
   otpMaxTries: number;
   isDaemonProcess: boolean;
+  isRestServer: boolean;
 
   emailSender: {
     senderEmail: string;
@@ -124,3 +125,6 @@ export interface PluginInterface {
   defineDBModel: (modelName: string, modelDefinition: ModelAttributes, options?: ModelOptions) => ModelStatic<any>;
 }
 
+export interface SessionControllerInterface {
+  endSession: (sessionID: string, closeSessionMsg?: string, doNotRemoveLoginToken?: boolean) => Promise<void>;
+}

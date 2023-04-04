@@ -1,4 +1,4 @@
-import { Common, RedisClient, PluginInterface } from './common';
+import { Common, RedisClient, PluginInterface, SessionControllerInterface } from './common';
 import { Login, GetLogin } from './login';
 
 
@@ -13,6 +13,7 @@ export interface CoreModule {
   GetLogin: GetLogin;
   redis: RedisClient;
   plugin: PluginInterface;
+  SessionController: SessionControllerInterface;
   
 }
 
