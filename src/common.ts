@@ -123,6 +123,7 @@ export interface RedisClient {
 export interface PluginInterface {
   sendMessageToPlugin: (pluginId: string, message: any) => Promise<any>;
   defineDBModel: (modelName: string, modelDefinition: ModelAttributes, options?: ModelOptions) => ModelStatic<any>;
+  createEvent: (isSecurityEvent: boolean, email: string, mainDomain: string, extraInfo: string, level: string) => Promise<any>;
 }
 
 export interface SessionControllerInterface {
