@@ -8,7 +8,7 @@ export type Next = (err?: any) => void;
 export interface Route {
   name: string;
   method: string;
-  path: string | RegExp;  
+  path: string | RegExp;
 }
 
 export interface Request extends http.IncomingMessage {
@@ -455,7 +455,6 @@ export interface Server extends http.Server {
    * @returns                the newly created route.
    */
   patch(opts: string | RegExp, handler: RequestHandler): Route;
-
 
   /**
    * Removes a route from the server.

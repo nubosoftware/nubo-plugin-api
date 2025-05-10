@@ -1,4 +1,4 @@
-import  { DataTypes, ModelAttributes, ModelOptions, Model, ModelStatic }  from  'sequelize';
+import { DataTypes, ModelAttributes, ModelOptions, Model, ModelStatic } from 'sequelize';
 
 export interface Common {
   STATUS_OK: 1;
@@ -120,10 +120,26 @@ export interface RedisClient {
   sendCommand: (command: string, ...args: any[]) => Promise<any>;
 }
 
+export interface EmailOptions {
+  from: string;
+  to: string;
+  subject: string;
+  text?: string;
+  html?: string;
+}
+
 export interface PluginInterface {
   sendMessageToPlugin: (pluginId: string, message: any) => Promise<any>;
   defineDBModel: (modelName: string, modelDefinition: ModelAttributes, options?: ModelOptions) => ModelStatic<any>;
-  createEvent: (isSecurityEvent: boolean, email: string, mainDomain: string, extraInfo: string, level: string) => Promise<any>;
+  createEvent: (
+    isSecurityEvent: boolean,
+    email: string,
+    mainDomain: string,
+    extraInfo: string,
+    level: string,
+  ) => Promise<any>;
+  sendSmsMessage: (phoneNumber: string, message: string) => Promise<any>;
+  sendEmailMessage: (mailOptions: EmailOptions) => Promise<any>;
 }
 
 export interface SessionControllerInterface {

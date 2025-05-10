@@ -8,10 +8,10 @@ export type StaticPlugIn = {
 };
 
 export type ServerMount = {
-  method: "get" | "post" | "put" | "del" | "head" | "opts";
+  method: 'get' | 'post' | 'put' | 'del' | 'head' | 'opts';
   path: string;
   handler: RequestHandler;
-}
+};
 
 export type PluginTriggerHandler = (objectType: string, action: string, ...params: any[]) => any;
 
@@ -19,29 +19,28 @@ export type PluginTrigger = {
   objectType: string;
   action: string;
   handler: PluginTriggerHandler;
-}
+};
 
 export type PluginConfigurationDesciption = {
   key: string;
   name: string;
-  dataType: "string" | "number" | "boolean" | "object" | "array";
+  dataType: 'string' | 'number' | 'boolean' | 'object' | 'array';
   defaultValue: any;
-}
-
+};
 
 export type SessionType = {
   value: string;
   title: string;
   icon?: string;
   link?: string;
-}
+};
 
 export type PluginInitResponse = {
   staticFoldersPlugins?: StaticPlugIn[];
   publicServerHandlers?: ServerMount[];
   triggers?: PluginTrigger[];
   sessionType?: SessionType | SessionType[];
-}
+};
 
 export interface PluginModule {
   getConfDesciptions?: () => PluginConfigurationDesciption[];
