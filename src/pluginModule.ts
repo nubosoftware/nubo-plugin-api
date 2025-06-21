@@ -26,7 +26,10 @@ export type PluginConfigurationDesciption = {
   name: string;
   dataType: 'string' | 'number' | 'boolean' | 'object' | 'array';
   defaultValue: any;
+  secretValue?: boolean;
 };
+
+export const SECRET_VALUE_INDICATOR = "***SECRET_VALUE_SET***";
 
 export type SessionType = {
   value: string;
